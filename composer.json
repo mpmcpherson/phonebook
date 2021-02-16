@@ -1,0 +1,22 @@
+{
+    "name": "michaelmcpherson/who-is-loader",
+    "description": "phonebook",
+    "type": "project",
+    "require": {
+        "io-developer/php-whois": "^4.0"
+    },
+    "require-dev": {
+        "io-developer/php-whois": "^4.0"
+    },
+    "authors": [
+        {
+            "name": "Michael McPherson",
+            "email": "michael@mpmcpherson.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Iodev\\Whois\\": "src"
+        }
+    }
+}
