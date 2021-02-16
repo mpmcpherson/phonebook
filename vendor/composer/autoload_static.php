@@ -6,45 +6,6 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit761b94760551d31030f2978cc90a159f
 {
-    public static $files = array (
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-    );
-
-    public static $prefixLengthsPsr4 = array (
-        'T' => 
-        array (
-            'TrueBV\\' => 7,
-        ),
-        'S' => 
-        array (
-            'Symfony\\Polyfill\\Mbstring\\' => 26,
-        ),
-        'I' => 
-        array (
-            'Iodev\\Whois\\' => 12,
-            'Iodev\\' => 6,
-        ),
-    );
-
-    public static $prefixDirsPsr4 = array (
-        'TrueBV\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/true/punycode/src',
-        ),
-        'Symfony\\Polyfill\\Mbstring\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
-        ),
-        'Iodev\\Whois\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
-        ),
-        'Iodev\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/io-developer/php-whois/src/Iodev',
-        ),
-    );
-
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
@@ -52,8 +13,6 @@ class ComposerStaticInit761b94760551d31030f2978cc90a159f
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit761b94760551d31030f2978cc90a159f::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit761b94760551d31030f2978cc90a159f::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInit761b94760551d31030f2978cc90a159f::$classMap;
 
         }, null, ClassLoader::class);
