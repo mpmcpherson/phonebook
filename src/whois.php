@@ -3,16 +3,16 @@ include 'phpWhois/src/whois.main.php';
 
 $whois = new Whois();
 
-$quad1 = 0;
-$quad2 = 0;
+$quad1 = 23;
+$quad2 = 26;
 $quad3 = 0;
-$quad4 = 0;
+$quad4 = 1;
 
 while($quad1<=255){
 	
 	
 	$res = getData($quad1.".".$quad2.".".$quad3.".".$quad4, $whois);
-	if($res[0]!=255){
+	if($res[0]!=255&&$res[0]!=''){
 		$quad1 = $res[0];
 		$quad2 = $res[1];
 		$quad3 = $res[2];
@@ -60,27 +60,31 @@ function getData(string $ip, $whois){
 
 	$result = $whois->Lookup($ip,false);
 
-	//print_r(betterAbstractPrint($result['regrinfo']));
-	//print_r($result['regrinfo']);
-	//print_r("\n");
-	//print_r("organization ".$result['regrinfo']['owner']['organization']."\n");
-	//print_r("inet number ".$result['regrinfo']['network']['inetnum']."\n");
-	//print_r("name ".$result['regrinfo']['network']['name']."\n");
-	//print_r("handle ".$result['regrinfo']['network']['handle']."\n");
-	//print_r("status ".$result['regrinfo']['network']['status']."\n");
-	//print_r("changed ".$result['regrinfo']['network']['changed']."\n");
-	
-	//print_r($result['regrinfo']['owner']['address']);
-	//print_r("\n");
-	$stringOut = betterAbstractPrint($result['regrinfo']);
+	$stringOut = betterAbstractPrint($result['rawdata']);
 	file_put_contents("/media/michaelmcpherson/easystore/dataStore/".$ip, $stringOut);
 
 	//$nextItem;
-	preg_match("/ [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/",$result['regrinfo']['network']['inetnum'],$nextItem);
+	//preg_match("/ [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/",$result['regrinfo']['network']['inetnum'],$nextItem);
+	$rightLine;
+
+	foreach ($result['rawdata'] as $key => $value) {
+		if(preg_match("/NetRange: + [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ - [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/",$value,$rightLine)){
+			break;
+		}
+	}
+	
+
+	print_r($rightLine);
+
+	preg_match("/- [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/",$rightLine[0],$nextItem);
+	
+	print_r($nextItem);
+
 	$res = trim($nextItem[0]);
 	print_r($res."\n");
-
+	//print_r($result);
 	preg_match_all("/[0-9]+/",$res,$matAry);
+
 	$quad1 = $matAry[0][0]; 
 	$quad2 = $matAry[0][1]; 
 	$quad3 = $matAry[0][2]; 
