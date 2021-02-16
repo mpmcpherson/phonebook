@@ -4,9 +4,9 @@ include 'phpWhois/src/whois.main.php';
 $whois = new Whois();
 
 $quad1 = 23;
-$quad2 = 26;
-$quad3 = 0;
-$quad4 = 1;
+$quad2 = 83;
+$quad3 = 64;
+$quad4 = 2;
 
 while($quad1<=255){
 	
@@ -63,22 +63,20 @@ function getData(string $ip, $whois){
 	$stringOut = betterAbstractPrint($result['rawdata']);
 	file_put_contents("/media/michaelmcpherson/easystore/dataStore/".$ip, $stringOut);
 
-	//$nextItem;
-	//preg_match("/ [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/",$result['regrinfo']['network']['inetnum'],$nextItem);
 	$rightLine;
 
 	foreach ($result['rawdata'] as $key => $value) {
-		if(preg_match("/NetRange: + [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ - [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/",$value,$rightLine)){
+		if(preg_match("/ + [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ - [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/",$value,$rightLine)){
+			print_r($value);
 			break;
 		}
 	}
 	
-
-	print_r($rightLine);
+	print_r("rightline ".$rightLine[0]);
 
 	preg_match("/- [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/",$rightLine[0],$nextItem);
 	
-	print_r($nextItem);
+	print_r("nextitem ".$nextItem);
 
 	$res = trim($nextItem[0]);
 	print_r($res."\n");
