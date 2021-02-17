@@ -4,8 +4,8 @@ include 'phpWhois/src/whois.main.php';
 
 $whois = new Whois();
 
-$quad1 = 0;
-$quad2 = 0;
+$quad1 = 24;
+$quad2 = 233;
 $quad3 = 0;
 $quad4 = 0;
 
@@ -22,7 +22,7 @@ while($quad1<=255){
 	
 	$ip = $quad1.".".$quad2.".".$quad3.".".$quad4; 	
 
-	sleep(1);
+	//sleep(1);
 
 	if($quad4<255){
 		$quad4++;
