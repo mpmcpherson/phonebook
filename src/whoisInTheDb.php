@@ -4,9 +4,9 @@ include 'phpWhois/src/whois.main.php';
 
 $whois = new Whois();
 
-$quad1 = 24;
-$quad2 = 233;
-$quad3 = 0;
+$quad1 = 27;
+$quad2 = 0;
+$quad3 = 63;
 $quad4 = 0;
 
 while($quad1<=255){
