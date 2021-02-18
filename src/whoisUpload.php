@@ -8,10 +8,18 @@ $files = GetFiles($target);
 foreach ($files as $file) {
 
 	$localFile = FileImport($file);
-	$fileVal = FileImport($localFile);
-	print_r($fileVal);
-	foreach ($fileVal as $key => $value) {
-		 mysqli_query($dbhandle, "insert into whoisip(ip,ARINDat) values('".end(explode("\\",$file))."','".$value."');");
+	
+	//$fileVal = FileImport($localFile);
+	//print_r($fileVal);
+	//$fileEnd = end(explode("\/",$file));
+
+	preg_match("/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/",$file,$fileEnd);
+
+	foreach ($localFile as $key => $value) {
+		$insert = "insert into whoisip(ip,ARINDat) values('".$fileEnd[0]."','".$value."');";
+		print_r($insert."\n");
+		mysqli_query($dbhandle, $insert);
+		//sleep(2);
 	}
 }
 
