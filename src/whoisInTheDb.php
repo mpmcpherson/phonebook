@@ -8,7 +8,7 @@ $quad1 = 27;
 $quad2 = 0;
 $quad3 = 63;
 $quad4 = 0;
-
+//37.45.132.209
 while($quad1<=255){
 	
 	
@@ -115,4 +115,45 @@ function betterAbstractPrint($obj){
 	}
 	return $print;
 }
+
+
+//Get the data from the files on the list
+function FileImport($filePathAndName)
+{
+	$myfile = fopen($filePathAndName, "r") or die("Unable to open file!");
+	$newFile = fread($myfile,filesize($filePathAndName));
+	fclose($myfile);
+
+	//print_r($myfile);
+
+	$fileAry = FileParser($newFile);
+
+
+	return $fileAry;
+
+	PrintCurrentFunction(__FUNCTION__);
+}
+
+//Get the full file path of the files in the data directories.
+function GetFiles($ArrayOfDataDirectories)
+{	
+
+	$outputFileList = array();
+
+	$fileList = scandir($ArrayOfDataDirectories[0]);
+
+	foreach($fileList as &$files)
+	{
+		if($files != "." && $files != "..")
+		{
+			array_push($outputFileList, $ArrayOfDataDirectories[0] . "/" . $files);
+		}
+	}
+	unset($files);
+
+	//PrintCurrentFunction(__FUNCTION__);
+
+	return $outputFileList;
+}
+
 ?>
